@@ -1,0 +1,31 @@
+{
+  "name": "soybean-admin-nestjs",
+  "version": "1.0.0",
+  "description": "Soybean Admin NestJS Monorepo",
+  "private": true,
+  "scripts": {
+    "install:backend": "cd backend && pnpm install",
+    "install:frontend": "cd frontend && pnpm install",
+    "install:all": "pnpm run install:backend && pnpm run install:frontend",
+    "dev:backend": "cd backend && pnpm run start:dev",
+    "dev:frontend": "cd frontend && pnpm run dev",
+    "build:backend": "cd backend && pnpm run build",
+    "build:frontend": "cd frontend && pnpm run build",
+    "lint:backend": "cd backend && pnpm run lint",
+    "lint:frontend": "cd frontend && pnpm run lint",
+    "lint": "pnpm run lint:backend && pnpm run lint:frontend",
+    "typecheck": "pnpm run typecheck:backend && pnpm run typecheck:frontend",
+    "typecheck:backend": "cd backend && pnpm run typecheck || echo 'No typecheck script in backend'",
+    "typecheck:frontend": "cd frontend && pnpm run typecheck || echo 'No typecheck script in frontend'",
+    "lint-staged": "lint-staged"
+  },
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "devDependencies": {
+    "prettier": "^3.0.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.0.0"
+  }
+}
