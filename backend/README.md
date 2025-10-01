@@ -3,7 +3,6 @@
 </p>
 
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
   <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
@@ -23,53 +22,77 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+# Backend (NestJS)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This service powers the starter API. It exposes a minimal auth flow built with NestJS 11, CQRS command handlers, and Prisma ORM talking to PostgreSQL.
 
-## Installation
+## Highlights
 
-```bash
-$ pnpm install
+- CQRS login command/handler (`LoginCommand` → `LoginHandler`)
+- BCrypt password hashing and JWT access tokens
+- Prisma repository implementation (`PrismaUsersRepository`)
+- Health check at `GET /api/health`
+
+## Requirements
+
+- Node.js 18+
+- pnpm 9+
+- PostgreSQL 16+
+- (Optional) Redis 7+ if you plan to extend caching queues
+
+## Environment
+
+Configure `backend/.env`:
+
+```env
+DATABASE_URL="postgresql://cms:cms@localhost:5432/cms_starter"
+APP_PORT=3000
+JWT_SECRET="change-me"
+JWT_EXPIRES_IN="1h"
 ```
 
-## Running the app
+Environment variables are loaded globally via `ConfigModule.forRoot`.
 
-```bash
-# development
-$ pnpm run start
+## Development workflow
 
-# watch mode
-$ pnpm run start:dev
+```powershell
+# Install dependencies
+pnpm install
 
-# production mode
-$ pnpm run start:prod
+# Generate Prisma client
+pnpm --filter backend prisma:generate
+
+# Apply migrations & seed
+pnpm --filter backend prisma:deploy
+pnpm --filter backend prisma:seed
+
+# Start the API with auto-reload
+pnpm --filter backend start:dev
 ```
 
-## Test
+The service listens on <http://localhost:3000/api>. Seeded credentials are `admin / admin123`.
 
-```bash
-# unit tests
-$ pnpm run test
+## Testing & linting
 
-# e2e tests
-$ pnpm run test:e2e
+| Command                          | Purpose                          |
+| -------------------------------- | -------------------------------- |
+| `pnpm --filter backend lint`     | Run ESLint on the Nest app       |
+| `pnpm --filter backend test`     | Unit tests (Jest)                |
+| `pnpm --filter backend test:e2e` | End-to-end tests using Supertest |
 
-# test coverage
-$ pnpm run test:cov
+## Project layout
+
+```
+backend/
+├── apps/base-system/src/
+│   ├── api/              # HTTP controllers (AuthController)
+│   ├── infra/            # Prisma service + repositories
+│   └── lib/              # CQRS login command + domain layer
+├── prisma/
+│   ├── schema.prisma     # User model
+│   ├── migrations/       # SQL migration history
+│   └── seeds/            # Default admin seed
+└── Dockerfile
 ```
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If
-you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+Extend the domain by adding new commands/queries under `lib/bounded-contexts` and exposing them through controllers inside `api/`.

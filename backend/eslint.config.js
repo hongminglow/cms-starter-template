@@ -1,10 +1,12 @@
+const js = require('@eslint/js');
 const typescript = require('@typescript-eslint/eslint-plugin');
 const typescriptParser = require('@typescript-eslint/parser');
-const importPlugin = require('eslint-plugin-import');
-const prettier = require('eslint-plugin-prettier');
-const path = require('path');
 
 module.exports = [
+  {
+    ignores: ['dist/**'],
+  },
+  js.configs.recommended,
   {
     files: ['**/*.ts'],
     languageOptions: {
@@ -17,70 +19,38 @@ module.exports = [
     },
     plugins: {
       '@typescript-eslint': typescript,
-      'import': importPlugin,
-      'prettier': prettier,
     },
     rules: {
-      '@typescript-eslint/interface-name-prefix': 'off',
+      ...typescript.configs.recommended.rules,
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
-      'import/order': ['error', {
-        'groups': ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
-        'pathGroups': [
-          {
-            'pattern': '@src/**',
-            'group': 'internal',
-            'position': 'after'
-          },
-          {
-            'pattern': '@src/infra/**',
-            'group': 'internal',
-            'position': 'after'
-          },
-          {
-            'pattern': '@src/lib/**',
-            'group': 'internal',
-            'position': 'after'
-          },
-          {
-            'pattern': '@config/**',
-            'group': 'internal',
-            'position': 'after'
-          },
-          {
-            'pattern': '@tests/**',
-            'group': 'internal',
-            'position': 'after'
-          },
-          {
-            'pattern': '@lib/**',
-            'group': 'internal',
-            'position': 'after'
-          }
-        ],
-        'pathGroupsExcludedImportTypes': ['builtin'],
-        'newlines-between': 'always',
-        'alphabetize': {
-          'order': 'asc',
-          'caseInsensitive': true
-        }
-      }],
-      'import/newline-after-import': 'error',
-      'import/no-duplicates': 'error',
+      'no-console': 'off',
     },
-    settings: {
-      'import/resolver': {
-        typescript: {
-          alwaysTryTypes: true,
-          project: [path.join(__dirname, './tsconfig.json')]
-        }
-      }
+  },
+  {
+    files: ['**/*.spec.ts', '**/*.e2e-spec.ts'],
+    plugins: {
+      '@typescript-eslint': typescript,
     },
-    ignores: ['.eslintrc.js'],
-    linterOptions: {
-      noInlineConfig: false,
-      reportUnusedDisableDirectives: true,
-    }
-  }
+    languageOptions: {
+      parser: typescriptParser,
+      parserOptions: {
+        project: 'tsconfig.json',
+        tsconfigRootDir: __dirname,
+        sourceType: 'module',
+      },
+      globals: {
+        describe: 'readonly',
+        beforeEach: 'readonly',
+        afterAll: 'readonly',
+        beforeAll: 'readonly',
+        it: 'readonly',
+        expect: 'readonly',
+      },
+    },
+    rules: {
+      ...typescript.configs.recommended.rules,
+    },
+  },
 ];

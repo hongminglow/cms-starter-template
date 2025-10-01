@@ -1,5 +1,5 @@
 <div align="center">
-	<img src="./public/favicon.svg" width="160" />
+	<img src="./public/logo.svg" width="160" />
 	<h1>SoybeanAdmin</h1>
   <span><a href="./README.md">中文</a> | English</span>
 </div>
@@ -13,14 +13,12 @@
 
 <a href="https://hellogithub.com/repository/1298f27d5fe54959a16cf9686516ddb3" target="_blank"><img src="https://abroad.hellogithub.com/v1/widgets/recommend.svg?rid=1298f27d5fe54959a16cf9686516ddb3&claim_uid=IiDXWmP4TEntjbV" alt="Featured｜HelloGitHub" style="width: 250px; height: 54px;" width="250" height="54" /></a>
 
-
 > [!NOTE]
 > If you think `SoybeanAdmin` is helpful to you, or you like our project, please give us a ⭐️ on GitHub. Your support is the driving force for us to continue to improve and add new features! Thank you for your support!
 
 ## Introduction
 
 [`SoybeanAdmin`](https://github.com/soybeanjs/soybean-admin) is a clean, elegant, beautiful and powerful admin template, based on the latest front-end technology stack, including Vue3, Vite5, TypeScript, Pinia and UnoCSS. It has built-in rich theme configuration and components, strict code specifications, and an automated file routing system. In addition, it also uses the online mock data solution based on ApiFox. `SoybeanAdmin` provides you with a one-stop admin solution, no additional configuration, and out of the box. It is also a best practice for learning cutting-edge technologies quickly.
-
 
 ## Features
 
@@ -35,7 +33,6 @@
 - **Rich page components**: built-in a variety of pages and components, including 403, 404, 500 pages, as well as layout components, tag components, theme configuration components, etc.
 - **Command line tool**: built-in efficient command line tool, git commit, delete file, release, etc.
 - **Mobile adaptation**: perfectly support mobile terminal to realize adaptive layout.
-
 
 ## Version
 
@@ -57,7 +54,6 @@
   - [Preview Link](https://legacy.soybeanjs.cn/)
   - [Github Repository](https://github.com/soybeanjs/soybean-admin/tree/legacy)
 
-
 ## Documentation
 
 - [Link](https://docs.soybeanjs.cn)
@@ -76,7 +72,6 @@
 ![](https://soybeanjs-1300612522.cos.ap-guangzhou.myqcloud.com/uPic/soybean-admin-v1-09.png)
 ![](https://soybeanjs-1300612522.cos.ap-guangzhou.myqcloud.com/uPic/soybean-admin-v1-10.png)
 ![](https://soybeanjs-1300612522.cos.ap-guangzhou.myqcloud.com/uPic/soybean-admin-v1-mobile.png)
-
 
 ## Usage
 
@@ -99,6 +94,7 @@ git clone https://github.com/soybeanjs/soybean-admin.git
 ```bash
 pnpm i
 ```
+
 > Since this project uses the pnpm monorepo management method, please do not use npm or yarn to install dependencies.
 
 **Start Project**
@@ -130,7 +126,6 @@ Refer to the [Code Synchronization](https://docs.soybeanjs.cn/guide/sync) docume
 - [FastSoyAdmin](https://github.com/sleep1223/fast-soy-admin): A modern Management Platform based on FastAPI+Vue3+Naive UI.
 - [ba](https://github.com/xiatianYa/Ba-Server): Backend service docking with soybean admin based on goFrame framework, adapted to dynamic routing, and interface authentication permissions.
 
-
 ## How to Contribute
 
 We warmly welcome and appreciate all forms of contributions. If you have any ideas or suggestions, please feel free to share them by submitting [pull requests](https://github.com/soybeanjs/soybean-admin/pulls) or creating GitHub [issue](https://github.com/soybeanjs/soybean-admin/issues/new).
@@ -144,8 +139,8 @@ This project has built-in `commit` command, you can execute `pnpm commit` to gen
 It is recommended to use the latest version of Chrome in development for a better experience.
 
 | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_48x48.png" alt="IE" width="24px" height="24px"  />](http://godban.github.io/browsers-support-badges/) | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt=" Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/) | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/) | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/) | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/) |
-| --- | --- | --- | --- | --- |
-| not support | last 2 versions | last 2 versions | last 2 versions | last 2 versions |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| not support                                                                                                                                                                                                                             | last 2 versions                                                                                                                                                                               | last 2 versions                                                                                                                                                                                       | last 2 versions                                                                                                                                                                                    | last 2 versions                                                                                                                                                                                    |
 
 ## OpenSource Author
 
@@ -183,3 +178,58 @@ Thanks the following people for their contributions. If you want to contribute t
 ## License
 
 This project is based on the [MIT © 2021 Soybean](./LICENSE) protocol, for learning purposes only, please retain the author's copyright information for commercial use, the author does not guarantee and is not responsible for the software.
+
+# Frontend (Vue 3 + Vite)
+
+A single-route dashboard that talks to the NestJS API. It uses Vue 3, Vue Router, and TypeScript, bundled by Vite.
+
+## Features
+
+- Minimal Home view with login form hitting `/api/auth/login`
+- Health status indicator sourced from `/api/health`
+- Global styles kept in `src/styles/base.css`
+- Typed environment variables provided via `vite-env.d.ts`
+
+## Commands
+
+```powershell
+# Install dependencies
+pnpm install
+
+# Start dev server on http://localhost:5173
+pnpm dev
+
+# Type-check the project
+pnpm typecheck
+
+# Lint Vue and TypeScript files
+pnpm lint
+
+# Build production assets
+pnpm build
+```
+
+## Environment variables
+
+All variables live in `.env*` files and are prefixed with `VITE_`:
+
+- `VITE_APP_TITLE` – document title shown in the browser tab
+- `VITE_APP_DESCRIPTION` – optional helper metadata
+- `VITE_API_URL` – base URL for API requests (defaults to `http://localhost:3000/api`)
+
+When the frontend is served by Docker, the production `.env.prod` file points to `/api` so requests are proxied to the backend container.
+
+## Project structure
+
+```
+frontend/
+├── src/
+│   ├── main.ts          # App bootstrap + document title
+│   ├── router/          # Vue Router instance
+│   ├── views/HomeView   # Dashboard UI
+│   └── styles/base.css  # Global styling
+├── public/              # Static assets (favicon, etc.)
+└── vite.config.ts       # Vite configuration
+```
+
+Add additional routes in `src/router/index.ts` and corresponding views under `src/views/`.
